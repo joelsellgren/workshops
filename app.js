@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 
 // require routes
 import { router as nameRouter } from './routers/nameRoutes.js';
+import { router as numberRouter } from './routers/numberRoutes.js'
 
 mongoose
   .connect(process.env.MONGODB_URL)
@@ -21,7 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // Routes
-app.use('/names', nameRouter);
+app.use('/api/names', nameRouter);
+app.use('/api/numbers', numberRouter)
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}/`);

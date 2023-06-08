@@ -1,73 +1,71 @@
-import { Name } from '../../models/name-model.js';
+import { RandomNumber } from '../../models/number-model.js';
 
-export const createName = async (req, res) => {
+export const createNumber = async (req, res) => {
   try {
-    const newName = await Name.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+    const newNumber = await RandomNumber.create({
+      number: req.body.number
     });
 
-    console.log(newName);
+    console.log(newNumber);
     res.status(201).json({
         status: 'success',
-        data: newName
+        data: newNumber
     });
   } catch (err) {
     res.status(500).send(err.message);
   }
 };
 
-export const getAllNames = async (req, res) => {
+export const getAllNumbers = async (req, res) => {
     try {
-        const names = await Name.find({})
-        console.log(names)
+        const numbers = await RandomNumber.find({})
+        console.log(numbers)
 
         res.status(200).json({
             status: 'success',
-            data: names
+            data: numbers
         });
     } catch (err) {
         res.status(500).send(err.message)
     }
 }
 
-export const getNameById = async (req, res) => {
+export const getNumberById = async (req, res) => {
     try {
-        const name = await Name.findById(req.params.id)
-        console.log(name)
+        const number = await RandomNumber.findById(req.params.id)
+        console.log(number)
         res.status(200).send({
             status: 'success',
-            data: name
+            data: number
         })
     } catch (err) {
         res.status(500).send(err.message)
     }
 }   
 
-export const updateName = async (req, res) => {
+export const updateNumber = async (req, res) => {
     try {
-      const updatedName = await Name.findByIdAndUpdate(
+      const updatedNumber = await RandomNumber.findByIdAndUpdate(
         req.params.id,
         {
-          firstName: req.body.firstName,
-          lastName: req.body.lastName
+          number: req.body.updatedNumber
         },
         { new: true } // Add this option to return the updated document
       );
   
-      console.log(updatedName);
+      console.log(updatedNumber);
       res.status(200).send({
         status: 'success',
-        data: updatedName
+        data: updatedNumber
       });
     } catch (err) {
       res.status(500).send(err.message);
     }
   };
 
-export const deleteName = async (req, res) => {
+export const deleteNumber = async (req, res) => {
     try {
-        await Name.findByIdAndDelete(req.params.id)
+        await RandomNumber.findByIdAndDelete(req.params.id)
         res.status(204).send({
             status: 'success',
             data: null

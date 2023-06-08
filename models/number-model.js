@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose"
 
 const numberSchema = new mongoose.Schema({
     number: {
@@ -7,4 +7,4 @@ const numberSchema = new mongoose.Schema({
     }
 })
 
-export const Number = mongoose.model('Number', numberSchema)
+export const RandomNumber = mongoose.model('RandomNumber', numberSchema)
