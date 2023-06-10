@@ -5,10 +5,13 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors'
 
-// require routes
+// import routes
 import { router as nameRouter } from './routers/nameRoutes.js';
 import { router as numberRouter } from './routers/numberRoutes.js'
 import { router as userRouter } from './routers/userRoutes.js'
+
+// import middleware
+import { authMiddleware } from './middlewares/authmiddleware.js';
 
 mongoose
   .connect(process.env.MONGODB_URL)
@@ -27,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/names', nameRouter);
 app.use('/api/numbers', numberRouter)
 app.use('/api/users', userRouter)
+
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}/`);

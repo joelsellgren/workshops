@@ -3,18 +3,19 @@ const router = express.Router();
 
 import * as userController from '../controllers/api/userController.js';
 import * as authController from '../controllers/api/authController.js'
+import { authMiddleware } from '../middlewares/authmiddleware.js';
 
-router.route('/register', authController)
+router.route('/login').post(authController.loginUser)
 
 router
   .route('/')
-  .get(userController.getAllUsers)
+  .get(authMiddleware, userController.getAllUsers)
   .post(userController.createUser);
 
 router
   .route('/:id')
   .get(userController.getUserById)
-  .patch(userController.updateUser)
-  .delete(userController.deleteUser);
+  .patch(authMiddleware, userController.updateUser)
+  .delete(authMiddleware, userController.deleteUser);
 
 export { router };
